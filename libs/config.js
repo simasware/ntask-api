@@ -1,14 +1,8 @@
-module.exports = {
-  database: "ntask",
-  username: "",
-  password: "",
-  params: {
-    dialect: "sqlite",
-    storage: "ntask.sqlite",
-    define: {
-      underscored: true
+module.exports = app => {
+    const env = process.env.NODE_ENV;
+    console.log(`env: ${env}`);
+    if (env){
+        return require(`./config.${env.trim()}.js`);
     }
-  },
-  jwtSecret: "NTa$k-api",
-  jwtSession: { session: false }
-};
+    return require("./config.development.js");
+}
